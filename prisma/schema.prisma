@@ -1,0 +1,52 @@
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-openssl-3.0.x"]
+}
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model PaymentOrder {
+  id            Int      @id @default(autoincrement())
+  uid           String
+  amount        Float
+  currency      String   @default("usd")
+  status        String   @default("pending")
+  customerId    String?
+  paymentIntent String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique
+  credits   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserSearchHistory {
+  id        Int      @id @default(autoincrement())
+  uid       String
+  username  String
+  type      String   @default("free")
+  remaining Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+model AccessLog {
+  id        Int      @id @default(autoincrement())
+  insertTime DateTime @default(now())
+  uid       String
+  sessionId  String
+  clientIp  String
+  clientUserAgent String
+  targetUrl String
+}
