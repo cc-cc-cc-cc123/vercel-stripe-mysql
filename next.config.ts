@@ -4,7 +4,7 @@ const imageHosts = [
   "res-back.pumpsoul.com",
   "recentlyfolowed.com ",
 ];
-import SitemapPlugin from "./SitemapPlugin";
+// import SitemapPlugin from "./SitemapPlugin";
 
 const nextConfig: NextConfig = () => {
   return {
@@ -41,7 +41,7 @@ const nextConfig: NextConfig = () => {
       deviceSizes: [100, 200, 500, 800, 1000],
     },
     webpack: (config: any) => {
-      config.plugins.push(new SitemapPlugin());
+      // config.plugins.push(new SitemapPlugin());
       return config;
     },
   };
